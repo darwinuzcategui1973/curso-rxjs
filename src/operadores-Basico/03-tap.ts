@@ -1,4 +1,4 @@
-import { range, from, fromEvent } from "rxjs";
+import { range } from "rxjs";
 import { tap, map } from "rxjs/operators";
 
 const numeros$ = range(1, 5);
