@@ -1,0 +1,2 @@
+Inicios de Operadores del Tiempo
+debounceTime(1000)
