@@ -2,7 +2,9 @@ import { ajax, AjaxError } from "rxjs/ajax";
 import { map, pluck, catchError } from "rxjs/operators";
 import { of } from "rxjs";
 
-const url = "https://api.github.com/users?per_page=5";
+// const url= 'http://localhost:3000/usuario_sin_token';
+const url   = 'https://stark-crag-88093.herokuapp.com/usuario_sin_token';
+// const url= 'https://api.github.com/users?per_page=5';
 
 const manejaErrores = (respuesta: Response) => {
   if (!respuesta.ok) {
