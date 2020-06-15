@@ -1,6 +1,6 @@
 import { ajax } from 'rxjs/ajax';
-import { switchMap, map } from 'rxjs/operators';
-import { zip, of } from 'rxjs';
+import { switchMap, map ,pluck} from 'rxjs/operators';
+import { zip, of,forkJoin } from 'rxjs';
 
 /**
  * Ejercicio: 
@@ -45,13 +45,33 @@ import { zip, of } from 'rxjs';
     const SW_API = 'https://swapi.dev/api';                     
     const getRequest = ( url: string ) => ajax.getJSON<any>(url);
     // ==================================================================
+    
 
-    // Realizar el llamado al URL para obtener a Luke Skywalker
-    getRequest(`Aquí va un URL`).pipe(
-        // Realizar los operadores respectivos aquí
-        
-
-
+//******** solucion de darwin**************************************
+//   
+//
+      const luke_Skywalker ='/people/1/'
+//    const specie ='/species/1/'
+//
+//   
+// forkJoin({
+//     personaje:getRequest(`${ SW_API}${luke_Skywalker} `).pipe(),
+//     // Realizar los operadores respectivos aquí
+//     especie:getRequest(`${ SW_API}${specie}`).pipe()}
+//***************************************************************** 
+        // solucion de Fernando
+ 
+        // Realizar el llamado al URL para obtener a Luke Skywalker
+        getRequest(`${ SW_API}${luke_Skywalker} `).pipe(
+        // Relizar los operadores Respectivos aqui  
+        //homeworld
+        //species estan en cero
+        //starships este si es un arreglo con dos
+        //primera respuesta
+         switchMap(resp=>zip(of(resp), getRequest(resp.starships[0])) ),
+         map(([personaje,starships]) => ({personaje,starships}))
+    
+    
         
 
     // NO TOCAR el subscribe ni modificarlo ==
@@ -59,7 +79,4 @@ import { zip, of } from 'rxjs';
     // =======================================
 
 
-
 })();
-
-		

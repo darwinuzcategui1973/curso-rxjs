@@ -1,21 +1,5 @@
-import { interval, timer } from 'rxjs';
-import { map, take } from 'rxjs/operators';
-/**
- * Ejercicio: Combinar ambos observables (letras$, numeros$)
- * para que las emisiones sean la concatenación de los últimos
- * valores emitidos
- */
-
-//  Ejemplo de la tada esperada:
-// a1
-// a2
-// b2
-// b3
-// c3
-// c4
-// d4
-// d5
-// e5
+import { interval, timer,combineLatest } from 'rxjs';
+import { map, take, pluck } from 'rxjs/operators';
 
 (() =>{
 
@@ -43,14 +27,15 @@ import { map, take } from 'rxjs/operators';
     // de estar procesada en su totalidad
     // ========================================
 
-
-
-
-
-
-
-
+    // solucion de Darwin Uzcategui
+//      combineLatest(
+//       letras$,
+//       numeros$,
+//   ).subscribe(console.log);
+  // solucion de Fernando Herrera
+  combineLatest(letras$,numeros$).pipe(
+      map(([letra,numero])=>letra+numero)
+  )
+      .subscribe(console.log);
 
 })();
-
-		
